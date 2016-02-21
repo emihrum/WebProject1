@@ -1,0 +1,9 @@
+package forum.webapp.thread;
+
+import java.util.Date;
+
+public class ThreadView {
+	private String userEmail;
+	private String title;
+	private Date date;
+}

@@ -1,0 +1,5 @@
+package forum.webapp.thread;
+
+public class ListThreads {
+
+}
