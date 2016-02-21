@@ -1,0 +1,5 @@
+1456072702158	Delete element
+1456072709202	Delete element
+1456084091242	Move 'persistence.xml' to 'METEA-INF'
+1456084272129	Rename resource 'METEA-INF'
+1456086634487	Extract local variable 'user'

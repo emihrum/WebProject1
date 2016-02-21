@@ -1070,3 +1070,15 @@ java.lang.NullPointerException
 
 !ENTRY oracle.eclipse.tools.glassfish 1 1 2016-02-21 11:15:14.940
 !MESSAGE GlassFish: Deploy direcotry D:\Programing\glassfish4\glassfish\domains\domain1\eclipseApps\forum-webapp
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2016-02-21 12:57:18.352
+!MESSAGE Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2016-02-21 12:57:18.360
+!MESSAGE Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2016-02-21 13:44:26.823
+!MESSAGE Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2016-02-21 13:44:26.828
+!MESSAGE Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!

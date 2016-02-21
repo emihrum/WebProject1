@@ -1,0 +1,102 @@
+package forum.database.jpa;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
+
+import forum.database.domain.Post;
+import forum.database.domain.Thread;
+import forum.database.domain.User;
+
+public class DataProvider implements AutoCloseable {
+	private EntityManagerFactory emf;
+
+	public DataProvider() {
+		emf = Persistence.createEntityManagerFactory("forumDatabasePU");
+	}
+
+	public void addUser(User user) {
+		save(user);
+	}
+
+	public void addPost(Post post) {
+		save(post);
+	}
+
+	public void addThread(Thread thread) {
+		save(thread);
+	}
+
+	private void save(Object object) {
+		EntityManager em = emf.createEntityManager();
+		try {
+			em.getTransaction().begin();
+			em.persist(object);
+			em.getTransaction().commit();
+		} finally {
+			em.close();
+		}
+	}
+
+	public List<User> getUsers() {
+		EntityManager em = emf.createEntityManager();
+		TypedQuery<User> userQuery = em.createQuery("SELECT u FROM User u", User.class);
+		List<User> users = userQuery.getResultList();
+		em.close();
+		return users;
+	}
+
+	public List<Post> getPosts() {
+		EntityManager em = emf.createEntityManager();
+		TypedQuery<Post> postQuery = em.createQuery("SELECT p FROM Post p", Post.class);
+		List<Post> posts = postQuery.getResultList();
+		em.close();
+		return posts;
+	}
+
+	public List<Post> getPostsOfUsers(User user) {
+		EntityManager em = emf.createEntityManager();
+		TypedQuery<Post> postQuery = em.createQuery("SELECT p FROM Post p WHERE p.user = :user", Post.class);
+		postQuery.setParameter("user", user);
+		List<Post> posts = postQuery.getResultList();
+		em.close();
+		return posts;
+	}
+
+	public List<Post> getLastPostOfEachThread() {
+		EntityManager em = emf.createEntityManager();
+		TypedQuery<Post> postQuery = em.createQuery(
+				"SELECT p FROM Post p WHERE p.postTime = (SELECT MAX(p2.postTime) FROM Post p2 WHERE p2.thread = p.thread)",
+				Post.class);
+		List<Post> posts = postQuery.getResultList();
+		em.close();
+		return posts;
+	}
+
+	public List<Thread> getThreads() {
+		EntityManager em = emf.createEntityManager();
+		TypedQuery<Thread> threadQuery = em.createQuery("SELECT t FROM Thread t", Thread.class);
+		List<Thread> threads = threadQuery.getResultList();
+		em.close();
+		return threads;
+	}
+
+	public void removeUser(User user) {
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		User managedUser = em.find(User.class, user.getEmail());
+		em.remove(managedUser);
+		em.getTransaction().commit();
+		em.close();
+	}
+
+	@Override
+	public void close() {
+		if (emf != null) {
+			emf.close();
+		}
+	}
+}

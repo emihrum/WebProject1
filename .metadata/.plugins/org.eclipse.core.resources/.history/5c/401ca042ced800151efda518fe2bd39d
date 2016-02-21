@@ -1,0 +1,13 @@
+package forum.database.domain;
+
+import java.util.Date;
+
+public class Thread {
+	private Long id;
+	private User user;
+	private String title;
+	private Date startTime;
+	
+	public Thread() {
+	}
+}

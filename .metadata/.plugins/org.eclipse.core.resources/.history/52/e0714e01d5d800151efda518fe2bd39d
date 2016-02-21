@@ -1,0 +1,24 @@
+package forum.database.jpa;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+public class DataProvider implements AutoCloseable{
+	private EntityManagerFactory emf;
+	
+	public DataProvider() {
+		emf = Persistence.createEntityManagerFactory("forumDatabasePU");
+	}
+	
+	public void addUser() {
+		EntityManager em = emf.createEntityManager();
+	}
+
+	@Override
+	public void close() {
+		if (emf != null) {
+			emf.close();				
+		}
+	}
+}

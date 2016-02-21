@@ -1,0 +1,10 @@
+package forum.database.jdbc;
+
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class Application {
+	public static void main(String[] args) throws SQLException {
+		DriverManager.getConnection("jdbc:derby:memory:forum-database;create=true");
+	}
+}

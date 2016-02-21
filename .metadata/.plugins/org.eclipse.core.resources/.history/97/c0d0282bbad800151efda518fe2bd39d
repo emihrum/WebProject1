@@ -1,0 +1,5 @@
+package forum.database.jdbc;
+
+public class Application {
+	
+}

@@ -1,0 +1,46 @@
+package forum.database.jdbc;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class Application {
+	public static void main(String[] args) throws SQLException {
+		Connection connection = DriverManager.getConnection("jdbc:derby:memory:forum-database;create=true");
+		Statement statement = connection.createStatement();
+		
+		statement.executeUpdate("CREATE TABLE \"User\" ("
+				+ "Name VARCHAR(255),"
+				+ "Email VARCHAR(255),"
+				+ "Password VARCHAR(255),"
+				+ "PRIMARY KEY (Email)"
+				+ ")");
+		
+		String name = "Test";
+		String email = "test@example.com";
+		String password = "password";
+		statement.executeUpdate("INSERT INTO \"User\" "
+				+ "(Name, Email, Password) VALUES "
+				+ "('" + name + "', '" + email + "', '" + password + "')");
+		
+		PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO \"User\" "
+				+ "(Name, Email, Password) VALUES "
+				+ "(?, ?, ?");
+		preparedStatement.setString(1, name);
+		preparedStatement.setString(2, email);
+		preparedStatement.setString(3, password);
+		preparedStatement.executeUpdate();
+		
+		ResultSet result = statement.executeQuery("SELECT * FROM \"User\"");
+		while(result.next()) {
+			System.out.println(result.getString("Name"));
+			System.out.println(result.getString("Email"));
+			System.out.println(result.getString("Password"));
+		}
+		
+		connection.close();
+	}
+}

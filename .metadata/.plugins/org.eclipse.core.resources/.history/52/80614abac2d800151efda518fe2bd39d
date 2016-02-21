@@ -1,0 +1,13 @@
+package forum.database.jdbc;
+
+import java.sql.SQLException;
+
+import forum.database.domain.User;
+
+public class Application {
+	public static void main(String[] args) throws SQLException {
+		DataProvider provider = new DataProvider();
+		provider.createUserTable();
+		provider.addUser(new User("Test1", "test1@eaxamples.com", "password"));
+	}
+}

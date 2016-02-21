@@ -1,0 +1,5 @@
+package forum.database.jpa;
+
+public class DataProvider {
+
+}

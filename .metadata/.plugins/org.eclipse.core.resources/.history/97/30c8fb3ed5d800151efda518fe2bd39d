@@ -1,0 +1,9 @@
+package forum.database.jpa;
+
+public class Application {
+	public static void main(String[] args) {
+		try (DataProvider provider = new DataProvider()) {
+			
+		}
+	}
+}

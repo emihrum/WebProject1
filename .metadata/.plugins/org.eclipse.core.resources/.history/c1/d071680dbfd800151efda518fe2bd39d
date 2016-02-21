@@ -1,0 +1,17 @@
+package forum.database.jdbc;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class DataProvider {
+	private Connection connection;
+	
+	public DataProvider() {
+		try {
+			Connection connection = DriverManager.getConnection("jdbc:derby:memory:forum-database;create=true");			
+		} catch (SQLException e) {
+			throw(new RuntimeException(e));
+		}
+	}
+}

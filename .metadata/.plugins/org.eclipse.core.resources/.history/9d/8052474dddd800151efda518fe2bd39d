@@ -1,0 +1,15 @@
+package forum.database.jpa;
+
+import forum.database.domain.User;
+
+public class Application {
+	public static void main(String[] args) {
+		try (DataProvider provider = new DataProvider()) {
+			User user = new User("Test1", "test1@example.com", "password");
+			provider.addUser(user);
+			System.out.println(provider.getUsers());
+			provider.removeUser(user);
+			System.out.println(provider.getUsers());
+		}
+	}
+}
